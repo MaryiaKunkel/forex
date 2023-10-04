@@ -6,6 +6,14 @@
     <title>Forex Converter</title>
 </head>
 <body>
+    <section class="message">
+        {% for category,msg in get_flashed_messages(with_categories=true) %}
+            <p class="{{category}}">{{ msg }}</p>
+        {% endfor %}
+    </section>
     {% block content %}{% endblock %}
+    <link rel="stylesheet" href="/static/app.css">
 </body>
 </html>
+
+
