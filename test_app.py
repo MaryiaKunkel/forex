@@ -27,6 +27,13 @@ class TestResultPage(TestCase):
             self.assertEqual(response.status_code, 200)
             self.assertIn('<h3>The result is $', html)
 
+        with app.test_client() as client:
+            response = client.post('/result', data={'convert_from': 'USD', 'convert_to': 'USD', 'amount': '1'})
+            html=response.get_data(as_text=True)
+
+            self.assertEqual(response.status_code, 200)
+            self.assertIn('<h3>The result is $1</h3>', html)
+
     def test_invalid_amount(self):
         with app.test_client() as client:
             response = client.post('/result', data={'convert_from': 'USD', 'convert_to': 'EUR', 'amount': 'ghghghg'})

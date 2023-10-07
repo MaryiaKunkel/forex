@@ -16,8 +16,21 @@ class TestCurrencyConversion(TestCase):
         invalid_currency='AAA'
         self.assertFalse(is_valid_currency_from(invalid_currency))
 
-    def test_get_exchange_rate(self):
+    def test_is_valid_exchange_rate(self):
+        valid_convert_from='USD'
+        valid_convert_to='RUB'
+        valid_amount='50'
+        access_key='fdf7087eb3fc3227ef65d44d43688757'
 
+        self.assertTrue(get_exchange_rate(valid_convert_from, valid_convert_to, access_key, valid_amount))
+
+    def test_is_invalid_exchange_rate(self):
+        valid_convert_from='USD'
+        invalid_convert_to='AAA'
+        valid_amount='50'
+        access_key='fdf7087eb3fc3227ef65d44d43688757'
+
+        self.assertFalse(get_exchange_rate(valid_convert_from, invalid_convert_to, access_key, valid_amount))
 
     def test_get_currency_symbol(self):
         valid_currency='USD'
