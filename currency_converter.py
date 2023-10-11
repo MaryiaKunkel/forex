@@ -6,7 +6,6 @@ def is_valid_amount(amount):
         return amount
         
 def is_valid_currency_from(data):
-    print(data)
     if data['success']:
         return True
     return False
@@ -18,10 +17,12 @@ def get_exchange_rate(convert_from, convert_to, access_key, amount):
     response = requests.get(api_url)
 
     data = response.json()
-    # data['source']=convert_from 
 
     if is_valid_amount(amount) and is_valid_currency_from(data):
-        if quote in data['quotes']:
+        if data['success'] and convert_from==convert_to:
+            print(data['success'], convert_to, convert_from)
+            return amount
+        elif quote in data['quotes']:
             exchange_rate=data['quotes'][quote]
             result=round(float(exchange_rate)*float(amount), 2)
             return result
